@@ -1,0 +1,113 @@
+<form
+  style="width: 50%; min-width: 350px"
+  [formGroup]="addForm"
+  (submit)="onSubmit()"
+>
+  <h2>Add Product</h2>
+  <div class="mb-3 mt-3">
+    <label for="name" class="form-label">Name</label>
+    <input
+      type="text"
+      class="form-control"
+      id="name"
+      placeholder="Enter name"
+      formControlName="name"
+      [ngClass]="{
+        'is-invalid': submited && addForm.controls['name'].errors
+      }"
+    />
+    <div
+      *ngIf="
+        addForm.controls['name'].errors &&
+        addForm.controls['name'].errors['required'] &&
+        addForm.controls['name'].invalid &&
+        (addForm.controls['name'].touched ||
+          addForm.controls['name'].dirty ||
+          submited)
+      "
+      class="text-danger"
+    >
+      <span> Name is required </span>
+    </div>
+  </div>
+  <div class="mb-3">
+    <label for="price" class="form-label">Price</label>
+    <input
+      type="number"
+      class="form-control"
+      id="price"
+      placeholder="Enter price"
+      formControlName="price"
+      [ngClass]="{
+        'is-invalid': submited && addForm.controls['price'].errors
+      }"
+    />
+    <div
+      *ngIf="
+        addForm.controls['price'].errors &&
+        addForm.controls['price'].errors['required'] &&
+        addForm.controls['price'].invalid &&
+        (addForm.controls['price'].touched ||
+          addForm.controls['price'].dirty ||
+          submited)
+      "
+      class="text-danger"
+    >
+      <span> Price is required </span>
+    </div>
+  </div>
+  <div class="mb-3">
+    <label for="description" class="form-label">Description</label>
+    <textarea
+      type="text"
+      class="form-control"
+      id="description"
+      placeholder="Enter description"
+      formControlName="description"
+      [ngClass]="{
+        'is-invalid': submited && addForm.controls['description'].errors
+      }"
+    ></textarea>
+    <div
+      *ngIf="
+        addForm.controls['description'].errors &&
+        addForm.controls['description'].errors['required'] &&
+        addForm.controls['description'].invalid &&
+        (addForm.controls['description'].touched ||
+          addForm.controls['description'].dirty ||
+          submited)
+      "
+      class="text-danger"
+    >
+      <span> Description is required </span>
+    </div>
+  </div>
+  <div class="mb-3">
+    <label for="imageUrl" class="form-label">Image</label>
+    <input
+      type="text"
+      class="form-control"
+      id="imageUrl"
+      placeholder="Enter image url"
+      formControlName="imageUrl"
+      [ngClass]="{
+        'is-invalid': submited && addForm.controls['imageUrl'].errors
+      }"
+    />
+    <div
+      *ngIf="
+        addForm.controls['imageUrl'].errors &&
+        addForm.controls['imageUrl'].errors['required'] &&
+        addForm.controls['imageUrl'].invalid &&
+        (addForm.controls['imageUrl'].touched ||
+          addForm.controls['imageUrl'].dirty ||
+          submited)
+      "
+      class="text-danger"
+    >
+      <span> Image is required </span>
+    </div>
+  </div>
+
+  <button type="submit" class="btn btn-primary">Add</button>
+</form>
