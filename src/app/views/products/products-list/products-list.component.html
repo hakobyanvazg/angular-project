@@ -105,12 +105,14 @@
     />
     <button class="btn btn-outline-success" type="button">Search</button>
   </form>
-  <div class="card" style="width: 400px" *ngFor="let product of products">
-    <img class="card-img-top" src="{{ product.imageUrl }}" alt="Card image" />
-    <div class="card-body">
-      <h4 class="card-title">{{ product.name }}</h4>
-      <p class="card-text">{{ product.price | currency }}</p>
-      <p class="card-text">{{ product.description }}</p>
+  <div style="display: flex; gap: 10px; flex-wrap: wrap">
+    <div class="card" style="width: 400px" *ngFor="let product of products">
+      <img class="card-img-top" src="{{ product.imageUrl }}" alt="Card image" />
+      <div class="card-body">
+        <h4 class="card-title">{{ product.name }}</h4>
+        <p class="card-text">{{ product.price | currency }}</p>
+        <p class="card-text">{{ product.description }}</p>
+      </div>
     </div>
   </div>
 </ng-template>

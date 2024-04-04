@@ -1,1 +1,117 @@
-<p>product-edit works!</p>
+<form
+  style="width: 50%; min-width: 350px"
+  [formGroup]="editForm"
+  (submit)="onSubmit()"
+>
+  <h2>Edit Product</h2>
+  <div class="mb-3 mt-3">
+    <label for="name" class="form-label">Name</label>
+    <input
+      type="text"
+      class="form-control"
+      id="name"
+      placeholder="Enter name"
+      formControlName="name"
+      [(ngModel)]="itemDetails.name"
+      [ngClass]="{
+        'is-invalid': submited && editForm.controls['name'].errors
+      }"
+    />
+    <div
+      *ngIf="
+        editForm.controls['name'].errors &&
+        editForm.controls['name'].errors['required'] &&
+        editForm.controls['name'].invalid &&
+        (editForm.controls['name'].touched ||
+          editForm.controls['name'].dirty ||
+          submited)
+      "
+      class="text-danger"
+    >
+      <span> Name is required </span>
+    </div>
+  </div>
+  <div class="mb-3">
+    <label for="price" class="form-label">Price</label>
+    <input
+      type="number"
+      class="form-control"
+      id="price"
+      placeholder="Enter price"
+      formControlName="price"
+      [(ngModel)]="itemDetails.price"
+      [ngClass]="{
+        'is-invalid': submited && editForm.controls['price'].errors
+      }"
+    />
+    <div
+      *ngIf="
+        editForm.controls['price'].errors &&
+        editForm.controls['price'].errors['required'] &&
+        editForm.controls['price'].invalid &&
+        (editForm.controls['price'].touched ||
+          editForm.controls['price'].dirty ||
+          submited)
+      "
+      class="text-danger"
+    >
+      <span> Price is required </span>
+    </div>
+  </div>
+  <div class="mb-3">
+    <label for="description" class="form-label">Description</label>
+    <textarea
+      type="text"
+      class="form-control"
+      id="description"
+      placeholder="Enter description"
+      formControlName="description"
+      [(ngModel)]="itemDetails.description"
+      [ngClass]="{
+        'is-invalid': submited && editForm.controls['description'].errors
+      }"
+    ></textarea>
+    <div
+      *ngIf="
+        editForm.controls['description'].errors &&
+        editForm.controls['description'].errors['required'] &&
+        editForm.controls['description'].invalid &&
+        (editForm.controls['description'].touched ||
+          editForm.controls['description'].dirty ||
+          submited)
+      "
+      class="text-danger"
+    >
+      <span> Description is required </span>
+    </div>
+  </div>
+  <div class="mb-3">
+    <label for="imageUrl" class="form-label">Image</label>
+    <input
+      type="text"
+      class="form-control"
+      id="imageUrl"
+      placeholder="Enter image url"
+      formControlName="imageUrl"
+      [(ngModel)]="itemDetails.imageUrl"
+      [ngClass]="{
+        'is-invalid': submited && editForm.controls['imageUrl'].errors
+      }"
+    />
+    <div
+      *ngIf="
+        editForm.controls['imageUrl'].errors &&
+        editForm.controls['imageUrl'].errors['required'] &&
+        editForm.controls['imageUrl'].invalid &&
+        (editForm.controls['imageUrl'].touched ||
+          editForm.controls['imageUrl'].dirty ||
+          submited)
+      "
+      class="text-danger"
+    >
+      <span> Image is required </span>
+    </div>
+  </div>
+
+  <button type="submit" class="btn btn-primary">Update</button>
+</form>

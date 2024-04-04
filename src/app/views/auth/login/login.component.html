@@ -1,26 +1,66 @@
 <div class="vh-100 d-flex justify-content-center align-items-center">
   <div class="col-md-5 p-5 shadow-sm border rounded-5 border-primary bg-white">
     <h2 class="text-center mb-4 login-form-title">Login</h2>
-    <form>
+    <form [formGroup]="loginForm" (submit)="onSubmit()">
       <div class="mb-3">
-        <label for="exampleInputEmail1" class="form-label">Email address</label>
+        <label for="email" class="form-label">Email address</label>
         <input
           type="email"
           class="form-control border border-primary"
-          id="exampleInputEmail1"
-          aria-describedby="emailHelp"
+          id="email"
+          [ngClass]="{
+            'is-invalid': submitted && loginForm.controls['email'].errors
+          }"
+          formControlName="email"
         />
+        <div
+          *ngIf="
+            loginForm.controls['email'].errors &&
+            loginForm.controls['email'].errors['required'] &&
+            loginForm.controls['email'].invalid &&
+            (loginForm.controls['email'].touched ||
+              loginForm.controls['email'].dirty ||
+              submitted)
+          "
+          class="text-danger"
+        >
+          <span> Email is required </span>
+        </div>
       </div>
       <div class="mb-3">
-        <label for="exampleInputPassword1" class="form-label">Password</label>
+        <label for="password" class="form-label">Password</label>
         <input
           type="password"
           class="form-control border border-primary"
-          id="exampleInputPassword1"
+          id="password"
+          [ngClass]="{
+            'is-invalid': submitted && loginForm.controls['email'].errors
+          }"
+          formControlName="password"
         />
+        <div
+          *ngIf="
+            loginForm.controls['password'].errors &&
+            loginForm.controls['password'].errors['required'] &&
+            loginForm.controls['password'].invalid &&
+            (loginForm.controls['password'].touched ||
+              loginForm.controls['password'].dirty ||
+              submitted)
+          "
+          class="text-danger"
+        >
+          <span *ngIf="loginForm.controls['password'].errors['required']">
+            Password is required
+          </span>
+          <span *ngIf="loginForm.controls['password'].errors['minlength']">
+            Password must be at least 6 digits
+          </span>
+        </div>
       </div>
       <p class="small">
-        <a class="forgot-pas" href="forget-password.html">Forgot password?</a>
+        <a class="forgot-pas" [routerLink]="['/auth/login/forgot-password']"
+          >Forgot password?</a
+        >
       </p>
       <div class="d-grid">
         <button class="btn" type="submit">Login</button>

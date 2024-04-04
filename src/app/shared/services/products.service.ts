@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Product } from 'src/app/models/product.model';
 import { Observable } from 'rxjs';
 
@@ -8,28 +8,40 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class ProductsService {
-  httpOptions = {
-    headers: new HttpHeaders({
-      Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGdtYWlsLmNvbSIsInBhc3N3b3JkIjoiMTIzNDU2IiwiaWF0IjoxNzEyMTA0NDQxLCJleHAiOjE3MTIxMDgwNDF9.w_jTNwOm1oCTI90S1cn4f9Yk5_7DzvLcLjWDuG4T8Qo`,
-    }),
-  };
+  
   constructor(private http: HttpClient) {}
 
   getAll(): Observable<Product[]> {
     return this.http.get<Product[]>(
-      `${environment.apiUrl}/products`,
-      this.httpOptions
+      `${environment.apiUrl}/products`
+      
     );
   }
 
   delete(id: any): Observable<Product[]> {
     return this.http.delete<Product[]>(
-      `${environment.apiUrl}/products/${id}`,
-      this.httpOptions
+      `${environment.apiUrl}/products/${id}`
+      
     );
   }
 
   add(data: Product) {
-    return this.http.post(`${environment.apiUrl}/products`,data, this.httpOptions);
+    return this.http.post(
+      `${environment.apiUrl}/products`,
+      data
+      
+    );
+  }
+
+  getItem(id:any) {
+    return this.http.get<Product>(`${environment.apiUrl}/products/${id}`);
+  }
+
+  update(data: Product, id: any) {
+    return this.http.put(
+      `${environment.apiUrl}/products/${id}`,
+      data
+      
+    );
   }
 }

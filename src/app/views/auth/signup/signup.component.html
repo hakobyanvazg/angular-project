@@ -1,14 +1,31 @@
 <div class="vh-100 d-flex justify-content-center align-items-center">
   <div class="col-md-5 p-5 shadow-sm border rounded-5 border-primary bg-white">
     <h2 class="text-center mb-4 signup-form-title">Sign Up</h2>
-    <form>
+    <form [formGroup]="signupForm" (submit)="onSubmit()">
       <div class="mb-3">
         <label for="firstName" class="form-label">First name</label>
         <input
           type="text"
           class="form-control border border-primary"
           id="firstName"
+          [ngClass]="{
+            'is-invalid': submitted && signupForm.controls['firstName'].errors
+          }"
+          formControlName="firstName"
         />
+        <div
+          *ngIf="
+            signupForm.controls['firstName'].errors &&
+            signupForm.controls['firstName'].errors['required'] &&
+            signupForm.controls['firstName'].invalid &&
+            (signupForm.controls['firstName'].touched ||
+              signupForm.controls['firstName'].dirty ||
+              submitted)
+          "
+          class="text-danger"
+        >
+          <span> Firstname is required </span>
+        </div>
       </div>
       <div class="mb-3">
         <label for="lastName" class="form-label">Last name</label>
@@ -16,7 +33,24 @@
           type="text"
           class="form-control border border-primary"
           id="lastName"
+          [ngClass]="{
+            'is-invalid': submitted && signupForm.controls['lastName'].errors
+          }"
+          formControlName="lastName"
         />
+        <div
+          *ngIf="
+            signupForm.controls['lastName'].errors &&
+            signupForm.controls['lastName'].errors['required'] &&
+            signupForm.controls['lastName'].invalid &&
+            (signupForm.controls['lastName'].touched ||
+              signupForm.controls['lastName'].dirty ||
+              submitted)
+          "
+          class="text-danger"
+        >
+          <span> Lastname is required </span>
+        </div>
       </div>
       <div class="mb-3">
         <label for="email" class="form-label">Email</label>
@@ -24,7 +58,24 @@
           type="email"
           class="form-control border border-primary"
           id="email"
+          [ngClass]="{
+            'is-invalid': submitted && signupForm.controls['email'].errors
+          }"
+          formControlName="email"
         />
+        <div
+          *ngIf="
+            signupForm.controls['email'].errors &&
+            signupForm.controls['email'].errors['required'] &&
+            signupForm.controls['email'].invalid &&
+            (signupForm.controls['email'].touched ||
+              signupForm.controls['email'].dirty ||
+              submitted)
+          "
+          class="text-danger"
+        >
+          <span> Email is required </span>
+        </div>
       </div>
       <div class="mb-3">
         <label for="password" class="form-label">Password</label>
@@ -32,14 +83,56 @@
           type="password"
           class="form-control border border-primary"
           id="password"
+          [ngClass]="{
+            'is-invalid': submitted && signupForm.controls['password'].errors
+          }"
+          formControlName="password"
         />
+        <div
+          *ngIf="
+            signupForm.controls['password'].errors &&
+            signupForm.controls['password'].errors['required'] &&
+            signupForm.controls['password'].invalid &&
+            (signupForm.controls['password'].touched ||
+              signupForm.controls['password'].dirty ||
+              submitted)
+          "
+          class="text-danger"
+        >
+          <span *ngIf="signupForm.controls['password'].errors['required']">
+            Password is required
+          </span>
+          <span *ngIf="signupForm.controls['password'].errors['minlength']">
+            Password must be at least 6 digits
+          </span>
+        </div>
       </div>
       <div class="form-group">
         <label for="role">Role</label>
-        <select class="form-control" id="role">
+        <select
+          class="form-control"
+          id="role"
+          formControlName="role"
+          [ngClass]="{
+            'is-invalid': submitted && signupForm.controls['role'].errors
+          }"
+        >
           <option value="admin">Admin</option>
           <option value="user">User</option>
         </select>
+        <!-- <div
+          *ngIf="
+            signupForm.controls['role'].errors &&
+            signupForm.controls['role'].errors['required'] &&
+            signupForm.controls['role'].invalid &&
+            (signupForm.controls['role'].touched ||
+              signupForm.controls['role'].dirty ||
+              submitted)
+          "
+          class="text-danger"
+        >
+          <span> Role is required </span>
+        </div> -->
       </div>
 
       <div class="d-grid">
