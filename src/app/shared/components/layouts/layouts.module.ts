@@ -5,6 +5,8 @@ import { UserLayoutComponent } from './user-layout/user-layout.component';
 import { AuthLayoutComponent } from './auth-layout/auth-layout.component';
 import { RouterModule } from '@angular/router';
 import { BlankLayoutComponent } from './blank-layout/blank-layout.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 
 @NgModule({
   declarations: [
@@ -13,6 +15,6 @@ import { BlankLayoutComponent } from './blank-layout/blank-layout.component';
     AuthLayoutComponent,
     BlankLayoutComponent,
   ],
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, FormsModule, ReactiveFormsModule,],
 })
 export class LayoutsModule {}

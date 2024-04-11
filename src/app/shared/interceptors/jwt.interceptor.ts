@@ -16,12 +16,10 @@ export class JwtInterceptor implements HttpInterceptor {
     request: HttpRequest<unknown>,
     next: HttpHandler
   ): Observable<HttpEvent<unknown>> {
-    if(request.url.startsWith(environment.apiUrl)){
-
+    if (request.url.startsWith(environment.apiUrl)) {
       request = request.clone({
         setHeaders: {
-          Authorization: `Bearer ${localStorage.getItem('access_token')}   `,
-  
+          Authorization: `Bearer ${localStorage.getItem("access_token")}`,
         },
       });
     }

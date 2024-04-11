@@ -1,0 +1,106 @@
+<form
+  style="width: 50%; min-width: 350px"
+  [formGroup]="editUserForm"
+  (submit)="onSubmit()"
+>
+  <h2>Edit User</h2>
+  <div class="mb-3 mt-3">
+    <label for="firstName" class="form-label">First name</label>
+    <input
+      type="text"
+      class="form-control"
+      id="firstName"
+      placeholder="Enter firstname"
+      formControlName="firstName"
+      [(ngModel)]="itemDetails.firstName"
+      [ngClass]="{
+        'is-invalid': submited && editUserForm.controls['firstName'].errors
+      }"
+    />
+
+    <div
+      *ngIf="
+        editUserForm.controls['firstName'].errors &&
+        editUserForm.controls['firstName'].errors['required'] &&
+        editUserForm.controls['firstName'].invalid &&
+        (editUserForm.controls['firstName'].touched ||
+          editUserForm.controls['firstName'].dirty ||
+          submited)
+      "
+      class="text-danger"
+    >
+      <span> firstName is required </span>
+    </div>
+  </div>
+  <div class="mb-3">
+    <label for="lastName" class="form-label">Last Name</label>
+    <input
+      type="text"
+      class="form-control"
+      id="lastName"
+      placeholder="Enter lastname"
+      formControlName="lastName"
+      [(ngModel)]="itemDetails.lastName"
+      [ngClass]="{
+        'is-invalid': submited && editUserForm.controls['lastName'].errors
+      }"
+    />
+    <div
+      *ngIf="
+        editUserForm.controls['lastName'].errors &&
+        editUserForm.controls['lastName'].errors['required'] &&
+        editUserForm.controls['lastName'].invalid &&
+        (editUserForm.controls['lastName'].touched ||
+          editUserForm.controls['lastName'].dirty ||
+          submited)
+      "
+      class="text-danger"
+    >
+      <span> lastName is required </span>
+    </div>
+  </div>
+  <div class="mb-3">
+    <label for="email" class="form-label">Email</label>
+    <input
+      type="text"
+      class="form-control"
+      id="email"
+      placeholder="Enter Email"
+      formControlName="email"
+      [(ngModel)]="itemDetails.email"
+      [ngClass]="{
+        'is-invalid': submited && editUserForm.controls['email'].errors
+      }"
+    />
+    <div
+      *ngIf="
+        editUserForm.controls['email'].errors &&
+        editUserForm.controls['email'].errors['required'] &&
+        editUserForm.controls['email'].invalid &&
+        (editUserForm.controls['email'].touched ||
+          editUserForm.controls['email'].dirty ||
+          submited)
+      "
+      class="text-danger"
+    >
+      <span> Email is required </span>
+    </div>
+  </div>
+  <div class="mb-3">
+    <label for="role" class="form-label">Role</label>
+    <select
+      class="form-control"
+      id="role"
+      formControlName="role"
+      [ngClass]="{
+        'is-invalid': submited && editUserForm.controls['role'].errors
+      }"
+      [(ngModel)]="itemDetails.role"
+    >
+      <option value="admin">Admin</option>
+      <option value="user">User</option>
+    </select>
+  </div>
+
+  <button type="submit" class="btn btn-primary">Update</button>
+</form>

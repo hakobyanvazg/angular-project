@@ -5,7 +5,9 @@
     type="text"
     placeholder="Search"
     aria-label="Search"
-  />
+    name="search"
+    [(ngModel)]="searchText"
+    (ngModelChange)="Search()"  />
   <ul class="navbar-nav px-3">
     <li class="nav-item text-nowrap">
       <a class="nav-link" (click)="logout()">Logout</a>
@@ -28,7 +30,6 @@
               {{ item.name }}
             </a>
           </li>
-          
         </ul>
       </div>
     </nav>

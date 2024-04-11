@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProductsService } from './../../../shared/services/products.service';
 import { Product } from 'src/app/models/product.model';
-import {  NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
@@ -13,6 +13,8 @@ import { ToastrService } from 'ngx-toastr';
 export class ProductsListComponent implements OnInit {
   isAdmin: boolean = false;
   products: Product[] = [];
+  searchText: string = '';
+  originalProducts: Product[] = [];
 
   constructor(
     private productService: ProductsService,
@@ -32,8 +34,20 @@ export class ProductsListComponent implements OnInit {
   getAllProduct() {
     this.productService.getAll().subscribe((res) => {
       this.products = res;
-      
+      this.originalProducts = [...res];
     });
+  }
+
+  Search() {
+    if (this.searchText === '') {
+      this.products = [...this.originalProducts];
+    } else {
+      this.products = this.originalProducts.filter((res) => {
+        return res.name
+          .toLocaleLowerCase()
+          .match(this.searchText.toLocaleLowerCase());
+      });
+    }
   }
 
   deleteItem(model: any, id: any) {

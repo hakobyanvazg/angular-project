@@ -32,13 +32,12 @@ export class LoginComponent implements OnInit {
 
   onSubmit() {
     this.submitted = true;
-console.log(this.loginForm.value);
+    console.log(this.loginForm.value);
 
     if (this.loginForm.invalid) {
-      return
+      return;
     }
     this.loading = true;
-    
 
     this.authService
       .login(this.loginForm.value)
@@ -46,15 +45,13 @@ console.log(this.loginForm.value);
       .subscribe(
         (res) => {
           console.log(res);
-
-         localStorage.setItem('access_token',res.access_token)
-          if(res.role === "admin"){
-            this.router.navigate(['../admin']);
-          }else{
-            this.router.navigate(['../user'])
-          }
-
           
+          localStorage.setItem('access_token', res.access_token);
+          if (res.role === 'admin') {
+            this.router.navigate(['../admin']);
+          } else {
+            this.router.navigate(['../user']);
+          }
         },
         (err) => {
           this.toastr.error(err.statusText, 'Error!', {
